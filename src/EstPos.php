@@ -657,10 +657,10 @@ class EstPos implements PosInterface
                 'ClientId'  => $this->account->client_id,
                 'OrderId'   => $meta['order_id'],
                 'Type'      => 'Credit',
+                "Total"     => $meta['amount'],
+                "Currency"  => 949,
             ]
         ];
-
-        if ($meta['amount']) $nodes['Total'] = $meta['amount'];
 
         $xml = $this->createXML($nodes, 'ISO-8859-9');
         $this->send($xml);
