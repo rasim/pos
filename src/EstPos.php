@@ -656,11 +656,14 @@ class EstPos implements PosInterface
                 'Password'  => $this->account->password,
                 'ClientId'  => $this->account->client_id,
                 'OrderId'   => $meta['order_id'],
-                'Type'      => 'Credit',
-                "Total"     => $meta['amount'],
-                "Currency"  => 949,
+                'Type'      => 'Credit'
             ]
         ];
+
+        if (!is_null($meta['amount'])){
+            $nodes['CC5Request']['Total']    = $meta['amount'];
+            $nodes['CC5Request']['Currency'] = 949;
+        }
 
         $xml = $this->createXML($nodes, 'ISO-8859-9');
         $this->send($xml);
